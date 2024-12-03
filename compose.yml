@@ -1,0 +1,18 @@
+services:
+  api:
+    container_name: grocery_list_backend
+    build:
+      context: .
+      args:
+        BUNDLER_VERSION: ${BUNDLER_VERSION}
+        BUNDLE_WITHOUT: ${BUNDLE_WITHOUT}
+        APP_ENV: ${APP_ENV}
+    ports:
+      - ${EXTERNAL_PORT:-3000}:4567
+    volumes:
+      - .:/home/app-user
+    environment:
+      APP_ENV: ${APP_ENV}
+      RACK_ENV: ${APP_ENV}
+    extra_hosts:
+      - host.docker.internal:host-gateway
